@@ -32,9 +32,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity reg16 is
-   port(D : std_logic_vector(15 downto 0);
+   port(D : in std_logic_vector(15 downto 0);
    load, Clk : in std_logic;
-   Q : std_logic_vector(15 downto 0));
+   Q : out std_logic_vector(15 downto 0));
 end reg16;
 
 architecture Behavioral of reg16 is
