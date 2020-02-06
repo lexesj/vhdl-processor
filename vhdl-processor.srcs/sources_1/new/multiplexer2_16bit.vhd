@@ -44,9 +44,9 @@ begin
   process(s, in1, in2)
   begin
     case s is
-      when "0" => z <= in1;
-      when "1" => z <= in2;
-      when others => z <= in1;
+      when "0" => z <= in1 after 5 ns;
+      when "1" => z <= in2 after 5 ns;
+      when others => z <= in1 after 5 ns;
     end case;
   end process;
 end Behavioral;

@@ -50,14 +50,14 @@ begin
    process (s, in1, in2, in3, in4, in5, in6, in7, in8)
    begin
       case s is
-         when "000" => z <= in1;
-         when "001" => z <= in2;
-         when "010" => z <= in3;
-         when "011" => z <= in4;
-         when "100" => z <= in5;
-         when "101" => z <= in6;
-         when "110" => z <= in7;
-         when "111" => z <= in8;
+         when "000" => z <= in1 after 5 ns;
+         when "001" => z <= in2 after 5 ns;
+         when "010" => z <= in3 after 5 ns;
+         when "011" => z <= in4 after 5 ns;
+         when "100" => z <= in5 after 5 ns;
+         when "101" => z <= in6 after 5 ns;
+         when "110" => z <= in7 after 5 ns;
+         when "111" => z <= in8 after 5 ns;
       end case;
    end process;
 end Behavioral;

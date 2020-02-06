@@ -42,14 +42,14 @@ begin
    process(A)
    begin
       case A is
-	 when "000" => Q <= "00000001";
-	 when "001" => Q <= "00000010";
-	 when "010" => Q <= "00000100";
-	 when "011" => Q <= "00001000";
-	 when "100" => Q <= "00010000";
-	 when "101" => Q <= "00100000";
-	 when "110" => Q <= "01000000";
-	 when "111" => Q <= "10000000";
+	 when "000" => Q <= "00000001" after 5 ns;
+	 when "001" => Q <= "00000010" after 5 ns;
+	 when "010" => Q <= "00000100" after 5 ns;
+	 when "011" => Q <= "00001000" after 5 ns;
+	 when "100" => Q <= "00010000" after 5 ns;
+	 when "101" => Q <= "00100000" after 5 ns;
+	 when "110" => Q <= "01000000" after 5 ns;
+	 when "111" => Q <= "10000000" after 5 ns;
       end case;
    end process;
 end Behavioral;
