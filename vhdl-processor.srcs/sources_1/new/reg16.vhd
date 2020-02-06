@@ -38,6 +38,7 @@ entity reg16 is
 end reg16;
 
 architecture Behavioral of reg16 is
+
 begin
    process(Clk)
    begin

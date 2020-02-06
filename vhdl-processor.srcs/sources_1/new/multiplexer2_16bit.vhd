@@ -39,6 +39,7 @@ entity multiplexer2_16bit is
 end multiplexer2_16bit;
 
 architecture Behavioral of multiplexer2_16bit is
+
 begin
   process(s, in1, in2)
   begin

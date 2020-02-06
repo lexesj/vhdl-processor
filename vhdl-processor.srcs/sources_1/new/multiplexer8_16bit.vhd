@@ -45,6 +45,7 @@ entity multiplexer8_16bit is
 end multiplexer8_16bit;
 
 architecture Behavioral of multiplexer8_16bit is
+
 begin
    process (s, in1, in2, in3, in4, in5, in6, in7, in8)
    begin

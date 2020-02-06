@@ -37,6 +37,7 @@ entity decoder_3to8 is
 end decoder_3to8;
 
 architecture Behavioral of decoder_3to8 is
+
 begin
    process(A)
    begin
