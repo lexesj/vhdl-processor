@@ -31,6 +31,10 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
+entity register_file_tb is
+end register_file_tb;
+
+
 architecture bench of register_file_tb is
 
   component register_file
