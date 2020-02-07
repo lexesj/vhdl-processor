@@ -80,9 +80,9 @@ architecture Behavioral of register_file is
    end component;
 
    signal load_reg0, load_reg1, load_reg2, load_reg3, load_reg4, load_reg5,
-   load_reg6, load_reg7, reg0_q, reg1_q, reg2_q, reg3_q, reg4_q, reg5_q,
-   reg6_q, reg7_q : std_logic;
-   signal src_reg, data_src_mux_out : std_logic_vector (15 downto 0);
+   load_reg6, load_reg7 : std_logic;
+   signal src_reg, data_src_mux_out, reg0_q, reg1_q, reg2_q, reg3_q, reg4_q,
+   reg5_q, reg6_q, reg7_q : std_logic_vector (15 downto 0);
 begin
    des_decoder_3to8 : decoder_3to8 port map (
                                                A => des_A,
@@ -103,56 +103,56 @@ begin
                                                                z => data_src_mux_out
                                                              );
 
-   reg0 : reg16 port map (
+   reg00 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg0,
                            Clk => Clk,
                            Q => reg0_q
                          );
 
-   reg1 : reg16 port map (
+   reg01 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg1,
                            Clk => Clk,
                            Q => reg1_q
                          );
 
-   reg2 : reg16 port map (
+   reg02 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg2,
                            Clk => Clk,
                            Q => reg2_q
                          );
 
-   reg3 : reg16 port map (
+   reg03 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg3,
                            Clk => Clk,
                            Q => reg3_q
                          );
 
-   reg4 : reg16 port map (
+   reg04 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg4,
                            Clk => Clk,
                            Q => reg4_q
                          );
 
-   reg5 : reg16 port map (
+   reg05 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg5,
                            Clk => Clk,
                            Q => reg5_q
                          );
 
-   reg6 : reg16 port map (
+   reg06 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg6,
                            Clk => Clk,
                            Q => reg6_q
                          );
 
-   reg7 : reg16 port map (
+   reg07 : reg16 port map (
                            D => data_src_mux_out,
                            load => load_reg7,
                            Clk => Clk,

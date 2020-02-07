@@ -50,6 +50,7 @@ begin
 	 when "101" => Q <= "00100000" after 5 ns;
 	 when "110" => Q <= "01000000" after 5 ns;
 	 when "111" => Q <= "10000000" after 5 ns;
+	 when others => Q <= "00000001" after 5 ns;
       end case;
    end process;
 end Behavioral;

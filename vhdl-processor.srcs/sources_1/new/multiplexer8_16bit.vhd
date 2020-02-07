@@ -58,6 +58,7 @@ begin
          when "101" => z <= in6 after 5 ns;
          when "110" => z <= in7 after 5 ns;
          when "111" => z <= in8 after 5 ns;
+         when others => z <= in1 after 5 ns;
       end case;
    end process;
 end Behavioral;
