@@ -39,14 +39,14 @@ entity multiplexer2_16bit is
 end multiplexer2_16bit;
 
 architecture Behavioral of multiplexer2_16bit is
-
+  constant gate_delay: Time := 1 ns;
 begin
   process(s, in1, in2)
   begin
     case s is
-      when '0' => z <= in1 after 5 ns;
-      when '1' => z <= in2 after 5 ns;
-      when others => z <= in1 after 5 ns;
+      when '0' => z <= in1 after gate_delay;
+      when '1' => z <= in2 after gate_delay;
+      when others => z <= in1 after gate_delay;
     end case;
   end process;
 end Behavioral;

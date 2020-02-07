@@ -38,13 +38,13 @@ entity reg16 is
 end reg16;
 
 architecture Behavioral of reg16 is
-
+   constant gate_delay: Time := 1 ns;
 begin
    process(Clk)
    begin
       if(rising_edge(Clk)) then
 	 if load='1' then
-	    Q <= D after 5 ns;
+	    Q <= D after gate_delay;
 	 end if;
       end if;
    end process;

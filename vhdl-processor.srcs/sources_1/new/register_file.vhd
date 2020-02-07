@@ -171,4 +171,13 @@ begin
                                                                in8 => reg7_q,
                                                                z => src_reg
                                                             );
+   reg0 <= reg0_q;
+   reg1 <= reg1_q;
+   reg2 <= reg2_q;
+   reg3 <= reg3_q;
+   reg4 <= reg4_q;
+   reg5 <= reg5_q;
+   reg6 <= reg6_q;
+   reg7 <= reg7_q;
+
 end Behavioral;

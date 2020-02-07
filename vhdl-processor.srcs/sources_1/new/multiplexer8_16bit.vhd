@@ -45,20 +45,20 @@ entity multiplexer8_16bit is
 end multiplexer8_16bit;
 
 architecture Behavioral of multiplexer8_16bit is
-
+   constant gate_delay: Time := 1 ns;
 begin
    process (s, in1, in2, in3, in4, in5, in6, in7, in8)
    begin
       case s is
-         when "000" => z <= in1 after 5 ns;
-         when "001" => z <= in2 after 5 ns;
-         when "010" => z <= in3 after 5 ns;
-         when "011" => z <= in4 after 5 ns;
-         when "100" => z <= in5 after 5 ns;
-         when "101" => z <= in6 after 5 ns;
-         when "110" => z <= in7 after 5 ns;
-         when "111" => z <= in8 after 5 ns;
-         when others => z <= in1 after 5 ns;
+         when "000" => z <= in1 after gate_delay;
+         when "001" => z <= in2 after gate_delay;
+         when "010" => z <= in3 after gate_delay;
+         when "011" => z <= in4 after gate_delay;
+         when "100" => z <= in5 after gate_delay;
+         when "101" => z <= in6 after gate_delay;
+         when "110" => z <= in7 after gate_delay;
+         when "111" => z <= in8 after gate_delay;
+         when others => z <= in1 after gate_delay;
       end case;
    end process;
 end Behavioral;
