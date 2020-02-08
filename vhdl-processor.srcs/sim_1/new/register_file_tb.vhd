@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
+-- use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -91,17 +91,132 @@ begin
 
     -- initialisation code
 
+    src_s <= "000";
+    des_A <= "000";
+    data_src <= '0';
+    data <= "1010101010101010";
 
     -- test bench stimulus code
 
+    -- load data into each register
+
+    des_A <= "000";
+
+    wait for 10 ns;
+
+    des_A <= "001";
+
+    wait for 10 ns;
+
+    des_A <= "010";
+
+    wait for 10 ns;
+
+    des_A <= "011";
+
+    wait for 10 ns;
+
+    des_A <= "100";
+
+    wait for 10 ns;
+
+    des_A <= "101";
+
+    wait for 10 ns;
+
+    des_A <= "110";
+
+    wait for 10 ns;
+
+    des_A <= "111";
+
+    wait for 10 ns;
+
+    -- reset data to 0 in each register
+
+    data <= "0000000000000000";
+    des_A <= "000";
+
+    wait for 10 ns;
+
+    des_A <= "001";
+
+    wait for 10 ns;
+
+    des_A <= "010";
+
+    wait for 10 ns;
+
+    des_A <= "011";
+
+    wait for 10 ns;
+
+    des_A <= "100";
+
+    wait for 10 ns;
+
+    des_A <= "101";
+
+    wait for 10 ns;
+
+    des_A <= "110";
+
+    wait for 10 ns;
+
+    des_A <= "111";
+
+    wait for 10 ns;
+
+    -- load data into register 0
+
+    data <= "0000010000101101";
+    des_A <= "000";
+
+    wait for 10 ns;
+
+    data <= "0000000000000000";
+
+    -- move data from register 0 to all other registers
+
+    data_src <= '1';
+    src_s <= "000";
+    des_A <= "001";
+
+    wait for 10 ns;
+
+    des_A <= "010";
+
+    wait for 10 ns;
+
+    des_A <= "011";
+
+    wait for 10 ns;
+
+    des_A <= "100";
+
+    wait for 10 ns;
+
+    des_A <= "101";
+
+    wait for 10 ns;
+
+    des_A <= "110";
+
+    wait for 10 ns;
+
+    des_A <= "111";
+
+    wait for 10 ns;
+
     stop_the_clock <= true;
+
     wait;
   end process;
 
   clocking: process
   begin
     while not stop_the_clock loop
-      clock <= '0', '1' after clock_period / 2;
+      Clk <= '0', '1' after clock_period / 2;
       wait for clock_period;
     end loop;
     wait;
