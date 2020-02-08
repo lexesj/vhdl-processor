@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company:
--- Engineer:
+-- Company: Trinity College Dublin
+-- Engineer: Lexes Jan Mantiquilla
 --
 -- Create Date: 06.02.2020 21:48:14
 -- Design Name:
