@@ -90,7 +90,11 @@ begin
 
     load <= '0';
 
-    -- stop_the_clock <= true;
+    wait for 10 ns;
+
+    stop_the_clock <= true;
+
+    wait;
   end process;
 
   clocking: process

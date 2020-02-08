@@ -120,6 +120,7 @@ begin
 
     s <= "111";
 
+    wait;
   end process;
 
 

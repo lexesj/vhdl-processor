@@ -67,8 +67,12 @@ begin
     -- test bench stimulus code
 
     s <= '0';
+
     wait for 5 ns;
+
     s <= '1';
+
+    wait;
 
   end process;
 

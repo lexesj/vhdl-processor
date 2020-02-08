@@ -73,7 +73,7 @@ begin
     A <= "110";
     wait for 5 ns;
     A <= "111";
-
+    wait;
   end process;
 
 
