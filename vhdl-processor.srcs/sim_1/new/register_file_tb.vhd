@@ -34,12 +34,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity register_file_tb is
 end register_file_tb;
 
-
 architecture bench of register_file_tb is
 
   component register_file
-     port(src_s : in std_logic_vector (2 downto 0);
-          des_A : in std_logic_vector (2 downto 0);
+     port(src_s0, src_s1, src_s2 : in std_logic;
+          des_A0, des_A1, des_A2 : in std_logic;
           Clk : in std_logic;
           data_src : in std_logic;
           data : in std_logic_vector (15 downto 0);
@@ -53,8 +52,8 @@ architecture bench of register_file_tb is
           reg7 : out std_logic_vector (15 downto 0));
   end component;
 
-  signal src_s: std_logic_vector (2 downto 0);
-  signal des_A: std_logic_vector (2 downto 0);
+  signal src_s0, src_s1, src_s2: std_logic;
+  signal des_A0, des_A1, des_A2: std_logic;
   signal Clk: std_logic;
   signal data_src: std_logic;
   signal data: std_logic_vector (15 downto 0);
@@ -72,8 +71,12 @@ architecture bench of register_file_tb is
 
 begin
 
-  uut: register_file port map ( src_s    => src_s,
-                                des_A    => des_A,
+  uut: register_file port map ( src_s0   => src_s0,
+                                src_s1   => src_s1,
+                                src_s2   => src_s2,
+                                des_A0   => des_A0,
+                                des_A1   => des_A1,
+                                des_A2   => des_A2,
                                 Clk      => Clk,
                                 data_src => data_src,
                                 data     => data,
@@ -91,8 +94,14 @@ begin
 
     -- initialisation code
 
-    src_s <= "000";
-    des_A <= "000";
+    src_s2 <= '0';
+    src_s1 <= '0';
+    src_s0 <= '0';
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
     data_src <= '0';
     data <= "1010101010101010";
 
@@ -100,77 +109,114 @@ begin
 
     -- load data into each register
 
-    des_A <= "000";
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "001";
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "010";
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "011";
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "100";
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "101";
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "110";
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "111";
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
     -- reset data to 0 in each register
 
     data <= "0000000000000000";
-    des_A <= "000";
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "001";
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "010";
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "011";
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "100";
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "101";
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "110";
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "111";
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
     -- load data into register 0
 
     data <= "0000010000101101";
-    des_A <= "000";
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
 
     wait for 10 ns;
 
@@ -179,32 +225,50 @@ begin
     -- move data from register 0 to all other registers
 
     data_src <= '1';
-    src_s <= "000";
-    des_A <= "001";
+
+    src_s2 <= '0';
+    src_s1 <= '0';
+    src_s0 <= '0';
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "010";
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "011";
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "100";
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "101";
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '1';
 
     wait for 10 ns;
 
-    des_A <= "110";
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '0';
 
     wait for 10 ns;
 
-    des_A <= "111";
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '1';
 
     wait for 10 ns;
 

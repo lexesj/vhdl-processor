@@ -32,8 +32,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity register_file is
-   port(src_s : in std_logic_vector (2 downto 0);
-        des_A : in std_logic_vector (2 downto 0);
+   port(src_s0, src_s1, src_s2 : in std_logic;
+        des_A0, des_A1, des_A2 : in std_logic;
         Clk : in std_logic;
         data_src : in std_logic;
         data : in std_logic_vector (15 downto 0);
@@ -81,9 +81,13 @@ architecture Behavioral of register_file is
 
    signal load_reg0, load_reg1, load_reg2, load_reg3, load_reg4, load_reg5,
    load_reg6, load_reg7 : std_logic;
+   signal src_s, des_A : std_logic_vector(2 downto 0);
    signal src_reg, data_src_mux_out, reg0_q, reg1_q, reg2_q, reg3_q, reg4_q,
    reg5_q, reg6_q, reg7_q : std_logic_vector (15 downto 0);
 begin
+   src_s <= src_s2 & src_s1 & src_s0;
+   des_A <= des_A2 & des_A1 & des_A0;
+
    des_decoder_3to8 : decoder_3to8 port map (
                                                A => des_A,
                                                Q(0) => load_reg0,
