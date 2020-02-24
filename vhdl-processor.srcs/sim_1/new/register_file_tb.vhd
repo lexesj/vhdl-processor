@@ -40,6 +40,7 @@ architecture bench of register_file_tb is
      port(src_s0, src_s1, src_s2 : in std_logic;
           des_A0, des_A1, des_A2 : in std_logic;
           Clk : in std_logic;
+          load_enable: in std_logic;
           data_src : in std_logic;
           data : in std_logic_vector (15 downto 0);
           reg0 : out std_logic_vector (15 downto 0);
@@ -55,6 +56,7 @@ architecture bench of register_file_tb is
   signal src_s0, src_s1, src_s2: std_logic;
   signal des_A0, des_A1, des_A2: std_logic;
   signal Clk: std_logic;
+  signal load_enable: std_logic;
   signal data_src: std_logic;
   signal data: std_logic_vector (15 downto 0);
   signal reg0: std_logic_vector (15 downto 0);
@@ -71,28 +73,215 @@ architecture bench of register_file_tb is
 
 begin
 
-  uut: register_file port map ( src_s0   => src_s0,
-                                src_s1   => src_s1,
-                                src_s2   => src_s2,
-                                des_A0   => des_A0,
-                                des_A1   => des_A1,
-                                des_A2   => des_A2,
-                                Clk      => Clk,
-                                data_src => data_src,
-                                data     => data,
-                                reg0     => reg0,
-                                reg1     => reg1,
-                                reg2     => reg2,
-                                reg3     => reg3,
-                                reg4     => reg4,
-                                reg5     => reg5,
-                                reg6     => reg6,
-                                reg7     => reg7 );
+  uut: register_file port map ( src_s0      => src_s0,
+                                src_s1      => src_s1,
+                                src_s2      => src_s2,
+                                des_A0      => des_A0,
+                                des_A1      => des_A1,
+                                des_A2      => des_A2,
+                                Clk         => Clk,
+                                load_enable => load_enable,
+                                data_src    => data_src,
+                                data        => data,
+                                reg0        => reg0,
+                                reg1        => reg1,
+                                reg2        => reg2,
+                                reg3        => reg3,
+                                reg4        => reg4,
+                                reg5        => reg5,
+                                reg6        => reg6,
+                                reg7        => reg7 );
 
   stimulus: process
   begin
 
     -- initialisation code
+
+    -- load disabled ----------------------------------------------------------
+
+    load_enable <= '0';
+
+    src_s2 <= '0';
+    src_s1 <= '0';
+    src_s0 <= '0';
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
+    data_src <= '0';
+    data <= "1010101010101010";
+
+    -- test bench stimulus code
+
+    -- load data into each register
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    -- reset data to 0 in each register
+
+    data <= "0000000000000000";
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    -- load data into register 0
+
+    data <= "0000010000101101";
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
+
+    wait for 10 ns;
+
+    data <= "0000000000000000";
+
+    -- move data from register 0 to all other registers
+
+    data_src <= '1';
+
+    src_s2 <= '0';
+    src_s1 <= '0';
+    src_s0 <= '0';
+
+    des_A2 <= '0';
+    des_A1 <= '0';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '0';
+    des_A1 <= '1';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '0';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '0';
+
+    wait for 10 ns;
+
+    des_A2 <= '1';
+    des_A1 <= '1';
+    des_A0 <= '1';
+
+    wait for 10 ns;
+
+    -- load enabled ----------------------------------------------------------
+
+    load_enable <= '1';
 
     src_s2 <= '0';
     src_s1 <= '0';

@@ -35,6 +35,7 @@ entity register_file is
    port(src_s0, src_s1, src_s2 : in std_logic;
         des_A0, des_A1, des_A2 : in std_logic;
         Clk : in std_logic;
+        load_enable: in std_logic;
         data_src : in std_logic;
         data : in std_logic_vector (15 downto 0);
         reg0 : out std_logic_vector (15 downto 0);
@@ -84,20 +85,30 @@ architecture Behavioral of register_file is
    signal src_s, des_A : std_logic_vector(2 downto 0);
    signal src_reg, data_src_mux_out, reg0_q, reg1_q, reg2_q, reg3_q, reg4_q,
    reg5_q, reg6_q, reg7_q : std_logic_vector (15 downto 0);
+   signal enable_reg_in : std_logic_vector (15 downto 0);
 begin
    src_s <= src_s2 & src_s1 & src_s0;
    des_A <= des_A2 & des_A1 & des_A0;
 
+   load_reg0 <= load_enable and enable_reg_in(0);
+   load_reg1 <= load_enable and enable_reg_in(1);
+   load_reg2 <= load_enable and enable_reg_in(2);
+   load_reg3 <= load_enable and enable_reg_in(3);
+   load_reg4 <= load_enable and enable_reg_in(4);
+   load_reg5 <= load_enable and enable_reg_in(5);
+   load_reg6 <= load_enable and enable_reg_in(6);
+   load_reg7 <= load_enable and enable_reg_in(7);
+
    des_decoder_3to8 : decoder_3to8 port map (
                                                A => des_A,
-                                               Q(0) => load_reg0,
-                                               Q(1) => load_reg1,
-                                               Q(2) => load_reg2,
-                                               Q(3) => load_reg3,
-                                               Q(4) => load_reg4,
-                                               Q(5) => load_reg5,
-                                               Q(6) => load_reg6,
-                                               Q(7) => load_reg7
+                                               Q(0) => enable_reg_in(0),
+                                               Q(1) => enable_reg_in(1),
+                                               Q(2) => enable_reg_in(2),
+                                               Q(3) => enable_reg_in(3),
+                                               Q(4) => enable_reg_in(4),
+                                               Q(5) => enable_reg_in(5),
+                                               Q(6) => enable_reg_in(6),
+                                               Q(7) => enable_reg_in(7)
                                             );
 
    data_src_multiplexer2_16bit : multiplexer2_16bit port map (
