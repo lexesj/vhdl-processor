@@ -32,33 +32,21 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity register_file is
-   port(src_s0, src_s1, src_s2 : in std_logic;
-        des_A0, des_A1, des_A2 : in std_logic;
+   port(
         Clk : in std_logic;
         load_enable: in std_logic;
-        data_src : in std_logic;
-        data : in std_logic_vector (15 downto 0);
-        reg0 : out std_logic_vector (15 downto 0);
-        reg1 : out std_logic_vector (15 downto 0);
-        reg2 : out std_logic_vector (15 downto 0);
-        reg3 : out std_logic_vector (15 downto 0);
-        reg4 : out std_logic_vector (15 downto 0);
-        reg5 : out std_logic_vector (15 downto 0);
-        reg6 : out std_logic_vector (15 downto 0);
-        reg7 : out std_logic_vector (15 downto 0));
+        A_sel : in std_logic_vector (2 downto 0);
+        B_sel : in std_logic_vector (2 downto 0);
+        des_sel : in std_logic_vector (2 downto 0);
+        D_data : in std_logic_vector (15 downto 0);
+        A_data : out std_logic_vector (15 downto 0);
+        B_data : out std_logic_vector (15 downto 0));
 end register_file;
 
 architecture Behavioral of register_file is
    component decoder_3to8 is
       port(A : in std_logic_vector(2 downto 0);
            Q : out std_logic_vector(7 downto 0));
-   end component;
-
-   component multiplexer2_16bit is
-      port(s : in std_logic;
-           in1 : in std_logic_vector(15 downto 0);
-           in2 : in std_logic_vector(15 downto 0);
-           z : out std_logic_vector(15 downto 0));
    end component;
 
    component reg16 is
@@ -82,14 +70,10 @@ architecture Behavioral of register_file is
 
    signal load_reg0, load_reg1, load_reg2, load_reg3, load_reg4, load_reg5,
    load_reg6, load_reg7 : std_logic;
-   signal src_s, des_A : std_logic_vector(2 downto 0);
-   signal src_reg, data_src_mux_out, reg0_q, reg1_q, reg2_q, reg3_q, reg4_q,
-   reg5_q, reg6_q, reg7_q : std_logic_vector (15 downto 0);
+   signal reg0_q, reg1_q, reg2_q, reg3_q, reg4_q, reg5_q, reg6_q, reg7_q :
+   std_logic_vector (15 downto 0);
    signal enable_reg_in : std_logic_vector (15 downto 0);
 begin
-   src_s <= src_s2 & src_s1 & src_s0;
-   des_A <= des_A2 & des_A1 & des_A0;
-
    load_reg0 <= load_enable and enable_reg_in(0);
    load_reg1 <= load_enable and enable_reg_in(1);
    load_reg2 <= load_enable and enable_reg_in(2);
@@ -100,7 +84,7 @@ begin
    load_reg7 <= load_enable and enable_reg_in(7);
 
    des_decoder_3to8 : decoder_3to8 port map (
-                                               A => des_A,
+                                               A => des_sel,
                                                Q(0) => enable_reg_in(0),
                                                Q(1) => enable_reg_in(1),
                                                Q(2) => enable_reg_in(2),
@@ -111,88 +95,86 @@ begin
                                                Q(7) => enable_reg_in(7)
                                             );
 
-   data_src_multiplexer2_16bit : multiplexer2_16bit port map (
-                                                               s => data_src,
-                                                               in1 => data,
-                                                               in2 => src_reg,
-                                                               z => data_src_mux_out
-                                                             );
-
    reg00 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg0,
                            Clk => Clk,
                            Q => reg0_q
                          );
 
    reg01 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg1,
                            Clk => Clk,
                            Q => reg1_q
                          );
 
    reg02 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg2,
                            Clk => Clk,
                            Q => reg2_q
                          );
 
    reg03 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg3,
                            Clk => Clk,
                            Q => reg3_q
                          );
 
    reg04 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg4,
                            Clk => Clk,
                            Q => reg4_q
                          );
 
    reg05 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg5,
                            Clk => Clk,
                            Q => reg5_q
                          );
 
    reg06 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg6,
                            Clk => Clk,
                            Q => reg6_q
                          );
 
    reg07 : reg16 port map (
-                           D => data_src_mux_out,
+                           D => D_data,
                            load => load_reg7,
                            Clk => Clk,
                            Q => reg7_q
                          );
 
-   src_reg_multiplexer8_16bit : multiplexer8_16bit port map (
-                                                               s => src_s,
-                                                               in1 => reg0_q,
-                                                               in2 => reg1_q,
-                                                               in3 => reg2_q,
-                                                               in4 => reg3_q,
-                                                               in5 => reg4_q,
-                                                               in6 => reg5_q,
-                                                               in7 => reg6_q,
-                                                               in8 => reg7_q,
-                                                               z => src_reg
-                                                            );
-   reg0 <= reg0_q;
-   reg1 <= reg1_q;
-   reg2 <= reg2_q;
-   reg3 <= reg3_q;
-   reg4 <= reg4_q;
-   reg5 <= reg5_q;
-   reg6 <= reg6_q;
-   reg7 <= reg7_q;
+   a_sel_mux : multiplexer8_16bit port map (
+                                             s => A_sel,
+                                             in1 => reg0_q,
+                                             in2 => reg1_q,
+                                             in3 => reg2_q,
+                                             in4 => reg3_q,
+                                             in5 => reg4_q,
+                                             in6 => reg5_q,
+                                             in7 => reg6_q,
+                                             in8 => reg7_q,
+                                             z => A_data
+                                           );
+
+   b_sel_mux : multiplexer8_16bit port map (
+                                             s => B_sel,
+                                             in1 => reg0_q,
+                                             in2 => reg1_q,
+                                             in3 => reg2_q,
+                                             in4 => reg3_q,
+                                             in5 => reg4_q,
+                                             in6 => reg5_q,
+                                             in7 => reg6_q,
+                                             in8 => reg7_q,
+                                             z => B_data
+                                           );
 
 end Behavioral;
