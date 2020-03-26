@@ -201,9 +201,15 @@ begin
     wait for wait_delay;
     control_word <= b"000_000_000_1_00101_0_1";
     const_in <= x"00ff";
+    wait for wait_delay;
 
-
+    -- result = 3x + 3 + 3
+    -- mov r1, #5         ; x = 5
+    control_word <= b"001_000_000_0_00000_1_1";
+    data_in <= x"0005";
     stop_the_clock <= true;
+    wait for wait_delay;
+
 
     wait;
   end process;
