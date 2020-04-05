@@ -40,9 +40,9 @@ architecture bench of register_file_tb is
      port(
           Clk : in std_logic;
           load_enable: in std_logic;
-          A_sel : in std_logic_vector (2 downto 0);
-          B_sel : in std_logic_vector (2 downto 0);
-          des_sel : in std_logic_vector (2 downto 0);
+          A_sel : in std_logic_vector (3 downto 0);
+          B_sel : in std_logic_vector (3 downto 0);
+          des_sel : in std_logic_vector (3 downto 0);
           D_data : in std_logic_vector (15 downto 0);
           A_data : out std_logic_vector (15 downto 0);
           B_data : out std_logic_vector (15 downto 0));
@@ -50,9 +50,9 @@ architecture bench of register_file_tb is
 
   signal Clk: std_logic;
   signal load_enable: std_logic;
-  signal A_sel: std_logic_vector (2 downto 0);
-  signal B_sel: std_logic_vector (2 downto 0);
-  signal des_sel: std_logic_vector (2 downto 0);
+  signal A_sel: std_logic_vector (3 downto 0);
+  signal B_sel: std_logic_vector (3 downto 0);
+  signal des_sel: std_logic_vector (3 downto 0);
   signal D_data: std_logic_vector (15 downto 0);
   signal A_data: std_logic_vector (15 downto 0);
   signal B_data: std_logic_vector (15 downto 0);
@@ -77,8 +77,8 @@ begin
     -- initialisation code
 
     D_data <= x"0000";
-    A_sel <= "000";
-    B_sel <= "000";
+    A_sel <= "0000";
+    B_sel <= "0000";
 
     -- test bench stimulus code
 
@@ -86,132 +86,146 @@ begin
 
     load_enable <= '1';
 
-    -- load nums 0-7 into each register
-    des_sel <= "000";
+    -- load nums 0-8 into each register
+    des_sel <= "0000";
     D_data <= x"0000";
     wait for 10 ns;
-    des_sel <= "001";
+    des_sel <= "0001";
     D_data <= x"0001";
     wait for 10 ns;
-    des_sel <= "010";
+    des_sel <= "0010";
     D_data <= x"0002";
     wait for 10 ns;
-    des_sel <= "011";
+    des_sel <= "0011";
     D_data <= x"0003";
     wait for 10 ns;
-    des_sel <= "100";
+    des_sel <= "0100";
     D_data <= x"0004";
     wait for 10 ns;
-    des_sel <= "101";
+    des_sel <= "0101";
     D_data <= x"0005";
     wait for 10 ns;
-    des_sel <= "110";
+    des_sel <= "0110";
     D_data <= x"0006";
     wait for 10 ns;
-    des_sel <= "111";
+    des_sel <= "0111";
     D_data <= x"0007";
+    wait for 10 ns;
+    des_sel <= "1000";
+    D_data <= x"0008";
     wait for 10 ns;
 
     -- change A select
-    A_sel <= "000";
+    A_sel <= "0000";
     wait for 10 ns;
-    A_sel <= "001";
+    A_sel <= "0001";
     wait for 10 ns;
-    A_sel <= "010";
+    A_sel <= "0010";
     wait for 10 ns;
-    A_sel <= "011";
+    A_sel <= "0011";
     wait for 10 ns;
-    A_sel <= "100";
+    A_sel <= "0100";
     wait for 10 ns;
-    A_sel <= "101";
+    A_sel <= "0101";
     wait for 10 ns;
-    A_sel <= "110";
+    A_sel <= "0110";
     wait for 10 ns;
-    A_sel <= "111";
+    A_sel <= "0111";
+    wait for 10 ns;
+    A_sel <= "1000";
     wait for 10 ns;
 
     -- change B select
-    B_sel <= "000";
+    B_sel <= "0000";
     wait for 10 ns;
-    B_sel <= "001";
+    B_sel <= "0001";
     wait for 10 ns;
-    B_sel <= "010";
+    B_sel <= "0010";
     wait for 10 ns;
-    B_sel <= "011";
+    B_sel <= "0011";
     wait for 10 ns;
-    B_sel <= "100";
+    B_sel <= "0100";
     wait for 10 ns;
-    B_sel <= "101";
+    B_sel <= "0101";
     wait for 10 ns;
-    B_sel <= "110";
+    B_sel <= "0110";
     wait for 10 ns;
-    B_sel <= "111";
+    B_sel <= "0111";
+    wait for 10 ns;
+    B_sel <= "1000";
     wait for 10 ns;
 
     -- load disabled ---------------------------------------------------------
 
     load_enable <= '0';
 
-    -- load nums 8-15 into each register
-    des_sel <= "000";
-    D_data <= x"0008";
-    wait for 10 ns;
-    des_sel <= "001";
+    -- load nums 9-17 into each register
+    des_sel <= "0000";
     D_data <= x"0009";
     wait for 10 ns;
-    des_sel <= "010";
+    des_sel <= "0001";
     D_data <= x"000a";
     wait for 10 ns;
-    des_sel <= "011";
+    des_sel <= "0010";
     D_data <= x"000b";
     wait for 10 ns;
-    des_sel <= "100";
+    des_sel <= "0011";
     D_data <= x"000c";
     wait for 10 ns;
-    des_sel <= "101";
+    des_sel <= "0100";
     D_data <= x"000d";
     wait for 10 ns;
-    des_sel <= "110";
+    des_sel <= "0101";
     D_data <= x"000e";
     wait for 10 ns;
-    des_sel <= "111";
+    des_sel <= "0110";
     D_data <= x"000f";
+    wait for 10 ns;
+    des_sel <= "0111";
+    D_data <= x"0010";
+    wait for 10 ns;
+    des_sel <= "1000";
+    D_data <= x"0011";
     wait for 10 ns;
 
     -- change A select
-    A_sel <= "000";
+    A_sel <= "0000";
     wait for 10 ns;
-    A_sel <= "001";
+    A_sel <= "0001";
     wait for 10 ns;
-    A_sel <= "010";
+    A_sel <= "0010";
     wait for 10 ns;
-    A_sel <= "011";
+    A_sel <= "0011";
     wait for 10 ns;
-    A_sel <= "100";
+    A_sel <= "0100";
     wait for 10 ns;
-    A_sel <= "101";
+    A_sel <= "0101";
     wait for 10 ns;
-    A_sel <= "110";
+    A_sel <= "0110";
     wait for 10 ns;
-    A_sel <= "111";
+    A_sel <= "0111";
+    wait for 10 ns;
+    A_sel <= "1000";
     wait for 10 ns;
 
     -- change B select
-    B_sel <= "000";
+    B_sel <= "0000";
     wait for 10 ns;
-    B_sel <= "001";
+    B_sel <= "0001";
     wait for 10 ns;
-    B_sel <= "010";
+    B_sel <= "0010";
     wait for 10 ns;
-    B_sel <= "011";
+    B_sel <= "0011";
     wait for 10 ns;
-    B_sel <= "100";
+    B_sel <= "0100";
     wait for 10 ns;
-    B_sel <= "101";
+    B_sel <= "0101";
     wait for 10 ns;
-    B_sel <= "110";
+    B_sel <= "0110";
     wait for 10 ns;
-    B_sel <= "111";
+    B_sel <= "0111";
+    wait for 10 ns;
+    B_sel <= "1000";
     wait for 10 ns;
 
     stop_the_clock <= true;
