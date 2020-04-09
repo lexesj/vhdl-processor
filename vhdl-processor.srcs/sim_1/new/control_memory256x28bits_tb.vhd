@@ -98,6 +98,7 @@ begin
     in_car <= x"00";
 
     -- test bench stimulus code
+    wait for clock_period;
 
     wait;
   end process;

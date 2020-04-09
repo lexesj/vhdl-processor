@@ -65,9 +65,12 @@ begin
   begin
   
     -- initialisation code
-
+    address <= x"0000";
+    write_data <= x"0000";
+    mem_write <= '0';
 
     -- test bench stimulus code
+    wait for clock_period;
 
     stop_the_clock <= true;
     wait;
