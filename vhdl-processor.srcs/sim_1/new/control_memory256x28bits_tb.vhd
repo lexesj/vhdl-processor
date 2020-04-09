@@ -72,6 +72,7 @@ architecture bench of control_memory256x28bits_tb is
   signal next_address: std_logic_vector(7 downto 0);
   signal in_car: std_logic_vector(7 downto 0);
 
+  constant wait_delay: time := 10 ns;
 begin
 
   uut: control_memory256x28bits port map ( mem_write        => mem_write,
@@ -98,7 +99,7 @@ begin
     in_car <= x"00";
 
     -- test bench stimulus code
-    wait for clock_period;
+    wait for wait_delay;
 
     wait;
   end process;
