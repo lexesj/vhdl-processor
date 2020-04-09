@@ -36,11 +36,13 @@ entity datapath_16bit is
          mux_d : in std_logic;
          function_select : in std_logic_vector (4 downto 0);
          mux_b : in std_logic;
+         mux_m : in std_logic;
          b_addr : in std_logic_vector (3 downto 0);
          a_addr : in std_logic_vector (3 downto 0);
          dest_addr : in std_logic_vector (3 downto 0);
          data_in : in std_logic_vector (15 downto 0);
          const_in : in std_logic_vector (15 downto 0);
+         pc_in : in std_logic_vector (15 downto 0);
          clock : in std_logic;
          V : out std_logic;
          C : out std_logic;
@@ -83,8 +85,8 @@ architecture Behavioral of datapath_16bit is
            z : out std_logic_vector(15 downto 0));
    end component;
 
-   signal bus_d, bus_a, bus_b0, bus_b1, funct_u_q: std_logic_vector(15 downto
-   0);
+   signal bus_d, bus_a, bus_b0, bus_b1, funct_u_q, bus_m: std_logic_vector(15
+   downto 0);
 begin
 
    reg_file : register_file port map (
@@ -129,7 +131,13 @@ begin
                                                 z => bus_d
                                              );
 
-   addr_out <= bus_a;
+   multiplex_m : multiplexer2_16bit port map (
+                                                s => mux_m,
+                                                in1 => bus_a,
+                                                in2 => pc_in,
+                                                z => addr_out
+                                             );
+
    data_out <= bus_b1;
 
 end Behavioral;
