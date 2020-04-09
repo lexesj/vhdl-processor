@@ -36,9 +36,9 @@ entity datapath_16bit is
          mux_d : in std_logic;
          function_select : in std_logic_vector (4 downto 0);
          mux_b : in std_logic;
-         b_addr : in std_logic_vector (2 downto 0);
-         a_addr : in std_logic_vector (2 downto 0);
-         dest_addr : in std_logic_vector (2 downto 0);
+         b_addr : in std_logic_vector (3 downto 0);
+         a_addr : in std_logic_vector (3 downto 0);
+         dest_addr : in std_logic_vector (3 downto 0);
          data_in : in std_logic_vector (15 downto 0);
          const_in : in std_logic_vector (15 downto 0);
          clock : in std_logic;
@@ -55,9 +55,9 @@ architecture Behavioral of datapath_16bit is
       port(
              Clk : in std_logic;
              load_enable: in std_logic;
-             A_sel : in std_logic_vector (2 downto 0);
-             B_sel : in std_logic_vector (2 downto 0);
-             des_sel : in std_logic_vector (2 downto 0);
+             A_sel : in std_logic_vector (3 downto 0);
+             B_sel : in std_logic_vector (3 downto 0);
+             des_sel : in std_logic_vector (3 downto 0);
              D_data : in std_logic_vector (15 downto 0);
              A_data : out std_logic_vector (15 downto 0);
              B_data : out std_logic_vector (15 downto 0));
