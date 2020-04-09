@@ -68,16 +68,16 @@ begin
   process(clock, reset)
   begin
     if pc_load='1' and pc_increment='0' then
-      sel <= x"2";
+      sel <= x"2" after gate_delay;
     elsif pc_load='0' and pc_increment='1' then
-      sel <= x"1";
+      sel <= x"1" after gate_delay;
     end if;
     if(rising_edge(clock)) then
       if reset='1' then
-        curr_address <= x"0000";
-        sel <= x"0";
+        curr_address <= x"0000" after gate_delay;
+        sel <= x"0" after gate_delay;
       else
-        curr_address <= alu_q;
+        curr_address <= alu_q after gate_delay;
       end if;
     end if;
   end process;
