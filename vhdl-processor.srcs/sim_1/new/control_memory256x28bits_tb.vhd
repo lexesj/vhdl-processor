@@ -99,6 +99,29 @@ begin
     in_car <= x"00";
 
     -- test bench stimulus code
+    in_car <= x"00";
+    wait for wait_delay;
+    in_car <= x"01";
+    wait for wait_delay;
+    in_car <= x"02";
+    wait for wait_delay;
+    in_car <= x"03";
+    wait for wait_delay;
+    in_car <= x"04";
+    wait for wait_delay;
+    in_car <= x"05";
+    wait for wait_delay;
+    in_car <= x"06";
+    wait for wait_delay;
+    in_car <= x"07";
+    wait for wait_delay;
+    in_car <= x"08";
+    wait for wait_delay;
+    in_car <= x"09";
+    wait for wait_delay;
+    in_car <= x"c0";
+    wait for wait_delay;
+    in_car <= x"c1";
     wait for wait_delay;
 
     wait;
