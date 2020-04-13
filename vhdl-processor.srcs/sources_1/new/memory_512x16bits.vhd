@@ -47,9 +47,9 @@ begin
   mem_process: process(address, write_data, clock)
     variable data_mem : mem_array := (
       -- 00
-      x"0000", -- 0
-      x"0000", -- 1
-      x"0000", -- 2
+      x"01f9", -- 0
+      x"01fa", -- 1
+      x"01fb", -- 2
       x"0000", -- 3
       x"0000", -- 4
       x"0000", -- 5

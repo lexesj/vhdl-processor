@@ -33,7 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity reg16 is
    port(D : in std_logic_vector(15 downto 0);
-   load, Clk : in std_logic;
+   reset, load, Clk : in std_logic;
    Q : out std_logic_vector(15 downto 0));
 end reg16;
 
@@ -43,7 +43,9 @@ begin
    process(Clk)
    begin
       if(rising_edge(Clk)) then
-	 if load='1' then
+	 if reset='1' then
+	    Q <= x"0000" after gate_delay;
+	 elsif load='1' then
 	    Q <= D after gate_delay;
 	 end if;
       end if;

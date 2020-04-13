@@ -38,12 +38,12 @@ architecture bench of reg16_tb is
 
   component reg16
      port(D : in std_logic_vector(15 downto 0);
-     load, Clk : in std_logic;
+     reset, load, Clk : in std_logic;
      Q : out std_logic_vector(15 downto 0));
   end component;
 
   signal D: std_logic_vector(15 downto 0);
-  signal load, Clk: std_logic;
+  signal reset, load, Clk: std_logic;
   signal Q: std_logic_vector(15 downto 0);
 
   constant clock_period: time := 10 ns;
@@ -52,6 +52,7 @@ architecture bench of reg16_tb is
 begin
 
   uut: reg16 port map ( D    => D,
+                        reset => reset,
                         load => load,
                         Clk  => Clk,
                         Q    => Q );
@@ -63,37 +64,28 @@ begin
 
     D <= "0000000000000000";
     load <= '0';
+    reset <= '0';
 
     -- test bench stimulus code
-
+    reset <= '1';
+    wait for 10 ns;
+    reset <= '0';
+    D <= "0101010101010101";
     load <= '1';
-
     wait for 10 ns;
-
     load <= '0';
-
     wait for 10 ns;
-
     load <= '1';
     D <= "1010101010101010";
-
     wait for 10 ns;
-
     load <= '0';
-
     wait for 10 ns;
-
     load <= '1';
     D <= "0000000011111111";
-
     wait for 10 ns;
-
     load <= '0';
-
     wait for 10 ns;
-
     stop_the_clock <= true;
-
     wait;
   end process;
 
