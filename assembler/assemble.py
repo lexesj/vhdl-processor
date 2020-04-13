@@ -53,7 +53,7 @@ def translate(assembly):
 def main():
     for line in sys.stdin.readlines():
         machine_code = translate(line)
-        formatted = 'x\"{0:04x}\" {0:b}'.format(machine_code)
+        formatted = 'x\"{0:04x}\"'.format(machine_code)
         print(formatted)
 
 
