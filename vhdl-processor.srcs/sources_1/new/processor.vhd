@@ -198,7 +198,7 @@ begin
                                           );
 
   multiplexer_c : multiplexer2_8bit port map (
-                                      s => mux_s_q,
+                                      s => mux_c,
                                       in1 => next_address,
                                       in2 => opcode,
                                       z => mux_c_q
