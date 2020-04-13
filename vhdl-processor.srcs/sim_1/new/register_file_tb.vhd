@@ -40,6 +40,7 @@ architecture bench of register_file_tb is
      port(
           Clk : in std_logic;
           load_enable: in std_logic;
+          reset: in std_logic;
           A_sel : in std_logic_vector (3 downto 0);
           B_sel : in std_logic_vector (3 downto 0);
           des_sel : in std_logic_vector (3 downto 0);
@@ -50,6 +51,7 @@ architecture bench of register_file_tb is
 
   signal Clk: std_logic;
   signal load_enable: std_logic;
+  signal reset: std_logic;
   signal A_sel: std_logic_vector (3 downto 0);
   signal B_sel: std_logic_vector (3 downto 0);
   signal des_sel: std_logic_vector (3 downto 0);
@@ -64,6 +66,7 @@ begin
 
   uut: register_file port map ( Clk         => Clk,
                                 load_enable => load_enable,
+                                reset       => reset,
                                 A_sel       => A_sel,
                                 B_sel       => B_sel,
                                 des_sel     => des_sel,
@@ -76,11 +79,16 @@ begin
 
     -- initialisation code
 
+    reset <= '0';
     D_data <= x"0000";
     A_sel <= "0000";
     B_sel <= "0000";
 
     -- test bench stimulus code
+
+    reset <= '1';
+    wait for clock_period;
+    reset <= '0';
 
     -- load enabled ---------------------------------------------------------
 

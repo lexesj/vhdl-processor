@@ -35,6 +35,7 @@ entity register_file is
    port(
         Clk : in std_logic;
         load_enable: in std_logic;
+        reset: in std_logic;
         A_sel : in std_logic_vector (3 downto 0);
         B_sel : in std_logic_vector (3 downto 0);
         des_sel : in std_logic_vector (3 downto 0);
@@ -51,7 +52,7 @@ architecture Behavioral of register_file is
 
    component reg16 is
       port(D : in std_logic_vector(15 downto 0);
-      load, Clk : in std_logic;
+      reset, load, Clk : in std_logic;
       Q : out std_logic_vector(15 downto 0));
    end component;
 
@@ -100,6 +101,7 @@ begin
 
    reg00 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg0,
                            Clk => Clk,
                            Q => reg0_q
@@ -107,6 +109,7 @@ begin
 
    reg01 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg1,
                            Clk => Clk,
                            Q => reg1_q
@@ -114,6 +117,7 @@ begin
 
    reg02 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg2,
                            Clk => Clk,
                            Q => reg2_q
@@ -121,6 +125,7 @@ begin
 
    reg03 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg3,
                            Clk => Clk,
                            Q => reg3_q
@@ -128,6 +133,7 @@ begin
 
    reg04 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg4,
                            Clk => Clk,
                            Q => reg4_q
@@ -135,6 +141,7 @@ begin
 
    reg05 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg5,
                            Clk => Clk,
                            Q => reg5_q
@@ -142,6 +149,7 @@ begin
 
    reg06 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg6,
                            Clk => Clk,
                            Q => reg6_q
@@ -149,6 +157,7 @@ begin
 
    reg07 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg7,
                            Clk => Clk,
                            Q => reg7_q
@@ -156,6 +165,7 @@ begin
 
    reg08 : reg16 port map (
                            D => D_data,
+                           reset => reset,
                            load => load_reg8,
                            Clk => Clk,
                            Q => reg8_q
