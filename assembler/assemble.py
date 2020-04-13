@@ -29,6 +29,18 @@ def translate(assembly):
         src1 = nums[1]
         src2 = nums[2]
         machine_code = opcode << 9 | dst << 6 | src1 << 3 | src2
+    elif n == 3:
+        opcode_token = tokens[0] 
+        dst = 0
+        src1 = 0
+        src2 = 0
+        if opcode_token == 'ld' or opcode_token == 'inc' or opcode_token== "not":
+            dst = nums[0]
+            src1 = nums[1]
+        elif opcode_token == 'st' or opcode_token == 'cmp':
+            src1 = nums[0]
+            src2 = nums[1]
+        machine_code = opcode << 9 | dst << 6 | src1 << 3 | src2
     elif n == 2:
         mask = 0b111
         displacement = nums[0]
