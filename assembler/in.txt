@@ -1,5 +1,3 @@
-adi r7, r1, #2
-add r7, r7, r2
-add r1, r1, r2
-not r2, r2
-inc r2, r2
+adi r7, r7, #1
+adi r7, r7, #2
+adi r7, r7, #3

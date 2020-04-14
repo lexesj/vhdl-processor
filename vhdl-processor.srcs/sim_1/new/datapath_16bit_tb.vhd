@@ -49,6 +49,7 @@ architecture bench of datapath_16bit_tb is
            const_in : in std_logic_vector (15 downto 0);
            pc_in : in std_logic_vector (15 downto 0);
            clock : in std_logic;
+           reset : in std_logic;
            V : out std_logic;
            C : out std_logic;
            N : out std_logic;
@@ -69,6 +70,7 @@ architecture bench of datapath_16bit_tb is
   signal const_in: std_logic_vector (15 downto 0);
   signal pc_in : std_logic_vector (15 downto 0);
   signal clock: std_logic;
+  signal reset: std_logic;
   signal V: std_logic;
   signal C: std_logic;
   signal N: std_logic;
@@ -104,6 +106,7 @@ begin
                                  const_in        => const_in,
                                  pc_in           => pc_in,
                                  clock           => clock,
+                                 reset           => reset,
                                  V               => V,
                                  C               => C,
                                  N               => N,
@@ -120,9 +123,14 @@ begin
     data_in <= x"0000";
     const_in <= x"0000";
     pc_in <= x"0000";
+    reset <= '0';
     wait for wait_delay;
 
     -- test bench stimulus code
+
+    reset <= '1';
+    wait for wait_delay;
+    reset <= '0';
 
     -- result = 3x + 3 + 3
     -- mov r1, #5         ; x = 5

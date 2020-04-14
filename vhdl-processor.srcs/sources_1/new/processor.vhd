@@ -50,6 +50,7 @@ architecture Behavioral of processor is
           const_in : in std_logic_vector (15 downto 0);
           pc_in : in std_logic_vector (15 downto 0);
           clock : in std_logic;
+          reset : in std_logic;
           V : out std_logic;
           C : out std_logic;
           N : out std_logic;
@@ -252,6 +253,7 @@ begin
                                       const_in => zero_fill_q,
                                       pc_in => pc_q,
                                       clock => clock,
+                                      reset => reset,
                                       V => v,
                                       C => c,
                                       N => n,

@@ -44,6 +44,7 @@ entity datapath_16bit is
          const_in : in std_logic_vector (15 downto 0);
          pc_in : in std_logic_vector (15 downto 0);
          clock : in std_logic;
+         reset : in std_logic;
          V : out std_logic;
          C : out std_logic;
          N : out std_logic;
@@ -57,6 +58,7 @@ architecture Behavioral of datapath_16bit is
       port(
              Clk : in std_logic;
              load_enable: in std_logic;
+             reset: in std_logic;
              A_sel : in std_logic_vector (3 downto 0);
              B_sel : in std_logic_vector (3 downto 0);
              des_sel : in std_logic_vector (3 downto 0);
@@ -92,6 +94,7 @@ begin
    reg_file : register_file port map (
                                         Clk => clock,
                                         load_enable => read_write,
+                                        reset => reset,
                                         A_sel => a_addr,
                                         B_sel => b_addr,
                                         des_sel => dest_addr,
