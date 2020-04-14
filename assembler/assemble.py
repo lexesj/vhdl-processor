@@ -15,7 +15,6 @@ OPCODE_TABLE = {
     }
 
 
-
 def translate(assembly):
     assembly = assembly.strip()
     tokens = assembly.split()
