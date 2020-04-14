@@ -95,8 +95,16 @@ begin
     wait for clock_period;
     pc_load <= '0';
     pc_increment <= '1';
-    stop_the_clock <= true;
     wait for clock_period;
+    pc_load <= '0';
+    pc_increment <= '0';
+    wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
+    stop_the_clock <= true;
 
     wait;
   end process;

@@ -71,6 +71,8 @@ begin
       sel <= x"2" after gate_delay;
     elsif pc_load='0' and pc_increment='1' then
       sel <= x"1" after gate_delay;
+    elsif pc_load='0' and pc_increment='0' then
+      sel <= x"0" after gate_delay;
     end if;
     if(rising_edge(clock)) then
       if reset='1' then
