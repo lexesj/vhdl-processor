@@ -80,6 +80,11 @@ begin
     pc_load <= '0';
     pc_increment <= '1';
     wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
+    wait for clock_period;
     displacement <= x"00ff";
     pc_load <= '1';
     pc_increment <= '0';

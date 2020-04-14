@@ -56,8 +56,8 @@ architecture Behavioral of program_counter16bit is
   constant gate_delay: time := 1 ns;
 begin
   alu : ALU_16bit port map (
-                            A => displacement,
-                            B => curr_address,
+                            A => curr_address,
+                            B => displacement,
                             c_in => sel(0),
                             S => sel(3 downto 1),
                             G => alu_q
