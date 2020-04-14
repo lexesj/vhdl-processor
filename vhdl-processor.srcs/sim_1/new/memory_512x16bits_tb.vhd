@@ -70,9 +70,38 @@ begin
     mem_write <= '0';
 
     -- test bench stimulus code
+    address <= x"0000";
     wait for clock_period;
-
+    address <= x"0001";
+    wait for clock_period;
+    address <= x"0002";
+    wait for clock_period;
+    address <= x"0003";
+    wait for clock_period;
+    address <= x"0000";
+    write_data <= x"0000";
+    mem_write <= '1';
+    wait for clock_period;
+    address <= x"0001";
+    write_data <= x"0001";
+    wait for clock_period;
+    address <= x"0002";
+    write_data <= x"0002";
+    wait for clock_period;
+    address <= x"0003";
+    write_data <= x"0003";
+    wait for clock_period;
+    address <= x"0000";
+    mem_write <= '0';
+    wait for clock_period;
+    address <= x"0001";
+    wait for clock_period;
+    address <= x"0002";
+    wait for clock_period;
+    address <= x"0003";
+    wait for clock_period;
     stop_the_clock <= true;
+
     wait;
   end process;
 
