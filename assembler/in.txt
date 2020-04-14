@@ -1,3 +1,2 @@
-adi r7, r7, #1
-adi r7, r7, #2
-adi r7, r7, #3
+adi r0, r0, #1
+b -2

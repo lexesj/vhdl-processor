@@ -12,6 +12,7 @@ OPCODE_TABLE = {
     'cmp': 6,
     'b': 7,
     'bc': 8,
+    'bhs': 8,
     }
 
 
