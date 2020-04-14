@@ -47,9 +47,9 @@ begin
   mem_process: process(address, write_data, clock)
     variable data_mem : mem_array := (
       -- 00
-      x"01f9", -- 0
-      x"01fa", -- 1
-      x"01fb", -- 2
+      x"0001", -- 0
+      x"0fc6", -- 1
+      x"0000", -- 2
       x"0000", -- 3
       x"0000", -- 4
       x"0000", -- 5
@@ -594,11 +594,10 @@ begin
     variable addr: integer;
   begin
     addr := conv_integer(unsigned(address(8 downto 0)));
+    read_data <= data_mem(addr) after gate_delay;
     if (rising_edge(clock)) then
       if mem_write='1' then
         data_mem(addr) := write_data;
-      else
-        read_data <= data_mem(addr) after gate_delay;
       end if;
     end if;
   end process;

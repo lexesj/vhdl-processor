@@ -44,7 +44,7 @@ architecture bench of processor_tb is
   signal clock: std_logic;
   signal reset: std_logic;
 
-  constant clock_period: time := 50 ns;
+  constant clock_period: time := 100 ns;
   signal stop_the_clock: boolean;
 begin
 
