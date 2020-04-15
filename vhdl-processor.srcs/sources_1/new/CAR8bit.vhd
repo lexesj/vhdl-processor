@@ -49,14 +49,14 @@ architecture Behavioral of CAR8bit is
           c_out : out std_logic);
   end component;
 
-  signal alu_q: std_logic_vector (15 downto 0);
+  signal alu_q, alu_in: std_logic_vector (15 downto 0);
   signal curr_address: std_logic_vector (7 downto 0);
   signal sel: std_logic_vector (3 downto 0);
 
   constant gate_delay: Time := 1 ns;
 begin
   alu : ALU_16bit port map (
-                            A => x"00" & curr_address,
+                            A => alu_in,
                             B => x"0000",
                             c_in => sel(0),
                             S => sel(3 downto 1),
@@ -65,6 +65,7 @@ begin
 
   sel <= x"1"; -- always increment
   addr_out <= curr_address;
+  alu_in <= x"00" & curr_address;
 
   process(clock, reset)
   begin
