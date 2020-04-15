@@ -1,2 +1,11 @@
+adi r1, r1, #7
 adi r0, r0, #1
+add r0, r0, r0
+dec r1, r1
+bne -3, r1
+st [r0], r0
+ld r1, [r0]
+inc r1, r1
+not r1, r1
+sr r1, r1
 b -2
