@@ -47,17 +47,19 @@ begin
   mem_process: process(address, write_data, clock)
     variable data_mem : mem_array := (
       -- 00
-      x"004f", -- 0
-      x"0001", -- 1
-      x"0a00", -- 2
-      x"1448", -- 3
-      x"0fcd", -- 4
-      x"0400", -- 5
-      x"0240", -- 6
-      x"0648", -- 7
-      x"0848", -- 8
-      x"1241", -- 9
-      x"0dc6", -- a
+      b"0000000_001_001_111", -- 0 adi r1, r1, #7 ; i = 7
+      b"0000000_000_000_001", -- 1 adi r0, r0, #1 ; num = 1
+      --                                          ; while (i >= 0) {
+      b"0000101_000_000_000", -- 2 add r0, r0, r0 ;   num += num
+      b"0001010_001_001_000", -- 3 dec r1, r1     ;   i--
+      b"0000111_111_001_101", -- 4 bne -3, r1     ; }
+      b"0000010_000_000_000", -- 5 st [r0], r0    ; Mem.halfword[num] = num
+      b"0000001_001_000_000", -- 6 ld r1, [r0]    ; num_copy = Mem.halfword[num]
+      b"0000011_001_001_000", -- 7 inc r1, r1     ; num_copy++
+      b"0000100_001_001_000", -- 8 not r1, r1     ; num_copy ~= num_copy
+      --                                          ; while (true) {
+      b"0001001_001_000_001", -- 9 sr r1, r1      ;   num_copy >>= num_copy
+      b"0000110_111_000_110", -- a b -2           ; }
       x"0000", -- b
       x"0000", -- c
       x"0000", -- d
