@@ -10,7 +10,7 @@ OPCODE_TABLE = {
     'not': 4,
     'add': 5,
     'b': 6,
-    'bne': 0b111,
+    'bne': 7,
     'nop': 8,
     'sr': 9,
     'dec': 10,
@@ -60,7 +60,7 @@ def translate(assembly):
 def main():
     for line in sys.stdin.readlines():
         machine_code = translate(line)
-        formatted = 'x"{0:04x}"'.format(machine_code)
+        formatted = '{0:04x}'.format(machine_code)
         print(formatted)
 
 
