@@ -18,10 +18,14 @@ Microcoded instruction set processor in VHDL
   2. Open Vivado and click ```Open Project```
   3. Open the ```vhdl-processor.xpr``` file
   4. Modify the program in the memory (optional)
+      1. Go to the ```assembler``` directory
+      ```
+      cd assembler
+      ```
       1. Edit the ```in.txt``` file
       2. Run the following command
       ```
-      python assembly.py < in.txt | python formatter.py
+      python assemble.py < in.txt | python formatter.py
       ```
       3. Copy the output of the into the ```memory_512x16bits.vhd``` file
   5. Run the simulation
