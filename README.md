@@ -22,12 +22,12 @@ Microcoded instruction set processor in VHDL
       ```
       cd assembler
       ```
-      1. Edit the ```in.txt``` file
-      2. Run the following command
+      2. Edit the ```in.txt``` file
+      3. Run the following command
       ```
       python assemble.py < in.txt | python formatter.py
       ```
-      3. Copy the output of the into the ```memory_512x16bits.vhd``` file
+      4. Copy the output of the into the ```memory_512x16bits.vhd``` file
   5. Run the simulation
       1. Click ```Run Simulation``` then
       2. Click ```Run Behavioral Simulation```
